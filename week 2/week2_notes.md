@@ -4,17 +4,17 @@
 
 ### Block Validation
 
-go
+```go
 func stf(parent types.Block, block types.Block, state state.StateDB) (state.StateDB, error) {
     if err := core.VerifyHeaders(parent, block); err != nil {
-            // header error detected
-            return nil, err
+        // header error detected
+        return nil, err
     }
     for , tx := range block.Transactions() {
         res, err := vm.Run(block.Header(), tx, state)
-        if err != nil {
-                // transaction invalid, block is invalid
-                return nil, err
+        if err != nil { 
+            // transaction invalid, block is invalid
+            return nil, err
         }
         state = res
     }
@@ -22,17 +22,18 @@ func stf(parent types.Block, block types.Block, state state.StateDB) (state.Stat
 }
 
 func newPayload(execPayload engine.ExecutionPayload) bool {
-    if , err := stf(..); err != nil {
+    if _, err := stf(..); err != nil {
         return false
     }
     return true
 }
+```
 
 https://github.com/ethereum/go-ethereum/blob/63aaac81007ad46b208570c17cae78b7f60931d4/consensus/beacon/consensus.go#L229C23-L229C35
 
 ### Block Building
 
-go
+```go
 func build(env Environment, pool txpool.Pool, state state.StateDB) (types.Block, state.StateDB, error) {
     var (
         gasUsed = 0
@@ -51,6 +52,7 @@ func build(env Environment, pool txpool.Pool, state state.StateDB) (types.Block,
     }
     return core.Finalize(env, txs, state)
 }
+```
 
 ### State Transition Function
 * walkthrough go-ethereum
@@ -81,7 +83,7 @@ func build(env Environment, pool txpool.Pool, state state.StateDB) (types.Block,
     * GetBlockBodies
     * GetReceipts
 * pending transactions
-    * Transactions
+    * Transactions1
     * NewPooledTransactionHashes
     * GetPooledTransactions
 * state

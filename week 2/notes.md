@@ -135,7 +135,7 @@ Q&A
 
 EVM structure
 - Imagine the area is the EVM call frame, which changes throughout the tx. Within the EVM call frame, there are:
-[Image]
+![evm structure](./evm_structure.png)
   - Code
   - PC (Program Counter): If PC is at 0, the interpreter will load the instruction at index is 0 in the code, then execute it. Then it would update the PC by 1 byte. 
   - Stack
